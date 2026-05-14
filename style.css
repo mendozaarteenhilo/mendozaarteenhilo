@@ -285,6 +285,47 @@ img {
   box-shadow: 0 20px 35px rgba(0, 0, 0, 0.06);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+.carousel-window {
+  overflow: hidden;
+  border-radius: 40px;
+}
+.carousel-track {
+  display: flex;
+  transition: transform 0.4s ease;
+}
+.carousel-slide {
+  min-width: 100%;
+  flex-shrink: 0;
+}
+.carousel-slide img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  display: block;
+}
+.carousel-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.2rem;
+}
+.carousel-prev,
+.carousel-next {
+  border: none;
+  background: rgba(90, 70, 52, 0.9);
+  color: white;
+  width: 44px;
+  height: 44px;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+.carousel-prev:hover,
+.carousel-next:hover {
+  background: #d68a6e;
+  transform: translateY(-2px);
+}
 .pet-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 25px 45px rgba(0, 0, 0, 0.08);
@@ -325,10 +366,23 @@ img {
   transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .product-card .card-info .product-desc {
-  margin: 0.75rem 0 1.25rem;
+  margin: 0.75rem 0 0.9rem;
   color: #6f6f6f;
   font-weight: 300;
   line-height: 1.7;
+}
+.product-card .card-info .price {
+  display: block;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  color: #D68A6E;
+  font-weight: 500;
+}
+.product-card .card-info .btn {
+  padding: 0.9rem 1.8rem;
+  font-size: 0.8rem;
+  width: fit-content;
 }
 .product-card .card-img .wishlist-btn {
   position: absolute;

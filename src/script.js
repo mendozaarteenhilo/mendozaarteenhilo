@@ -60,4 +60,24 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
+const petCarouselTrack = document.querySelector('.pets-carousel .carousel-track');
+const petPrev = document.querySelector('.pets-carousel .carousel-prev');
+const petNext = document.querySelector('.pets-carousel .carousel-next');
+if (petCarouselTrack && petPrev && petNext) {
+    const petSlides = Array.from(petCarouselTrack.querySelectorAll('.carousel-slide'));
+    let petIndex = 0;
+    const updatePetCarousel = () => {
+        petCarouselTrack.style.transform = `translateX(-${petIndex * 100}%)`;
+    };
+    petPrev.addEventListener('click', () => {
+        petIndex = (petIndex - 1 + petSlides.length) % petSlides.length;
+        updatePetCarousel();
+    });
+    petNext.addEventListener('click', () => {
+        petIndex = (petIndex + 1) % petSlides.length;
+        updatePetCarousel();
+    });
+    window.addEventListener('resize', updatePetCarousel);
+}
+
 console.log('Mendoza Arte en Hilo - Boutique Site Loaded');
