@@ -100,6 +100,7 @@ class ProductCarousel {
         
         // Touch events for mobile
         this.track.addEventListener('touchstart', (e) => this.handleTouchStart(e), false);
+        this.track.addEventListener('touchmove', (e) => this.handleTouchMove(e), false);
         this.track.addEventListener('touchend', (e) => this.handleTouchEnd(e), false);
         
         // Indicator clicks
@@ -116,7 +117,14 @@ class ProductCarousel {
     
     handleTouchStart(e) {
         this.touchStartX = e.changedTouches[0].screenX;
+        this.touchEndX = this.touchStartX;
         this.stopAutoplay();
+    }
+    
+    handleTouchMove(e) {
+        if (e.changedTouches && e.changedTouches.length) {
+            this.touchEndX = e.changedTouches[0].screenX;
+        }
     }
     
     handleTouchEnd(e) {
