@@ -206,24 +206,34 @@ document.querySelectorAll('.product-card').forEach(card => {
 });
 
 // Pets Carousel (existing)
-const petCarouselTrack = document.querySelector('.pets-carousel .carousel-track');
-const petPrev = document.querySelector('.pets-carousel .carousel-prev');
-const petNext = document.querySelector('.pets-carousel .carousel-next');
-if (petCarouselTrack && petPrev && petNext) {
-    const petSlides = Array.from(petCarouselTrack.querySelectorAll('.carousel-slide'));
-    let petIndex = 0;
-    const updatePetCarousel = () => {
-        petCarouselTrack.style.transform = 'translateX(-' + (petIndex * 100) + '%)';
-    };
-    petPrev.addEventListener('click', () => {
-        petIndex = (petIndex - 1 + petSlides.length) % petSlides.length;
-        updatePetCarousel();
+const initSlidingCarousel = (carouselSelector, prevSelector, nextSelector) => {
+    document.querySelectorAll(carouselSelector).forEach(carousel => {
+        const track = carousel.querySelector('.carousel-track');
+        const prev = carousel.querySelector(prevSelector);
+        const next = carousel.querySelector(nextSelector);
+        if (!track || !prev || !next) return;
+
+        const slides = Array.from(track.querySelectorAll('.carousel-slide'));
+        let index = 0;
+        const update = () => {
+            track.style.transform = 'translateX(-' + (index * 100) + '%)';
+        };
+
+        prev.addEventListener('click', () => {
+            index = (index - 1 + slides.length) % slides.length;
+            update();
+        });
+
+        next.addEventListener('click', () => {
+            index = (index + 1) % slides.length;
+            update();
+        });
+
+        window.addEventListener('resize', update);
     });
-    petNext.addEventListener('click', () => {
-        petIndex = (petIndex + 1) % petSlides.length;
-        updatePetCarousel();
-    });
-    window.addEventListener('resize', updatePetCarousel);
-}
+};
+
+initSlidingCarousel('.pets-carousel', '.carousel-prev', '.carousel-next');
+initSlidingCarousel('.beach-carousel', '.carousel-prev', '.carousel-next');
 
 console.log('Mendoza Arte en Hilo - Boutique Site Loaded');
